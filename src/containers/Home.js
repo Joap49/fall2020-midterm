@@ -13,13 +13,13 @@ function Home() {
 
     const history = useHistory();
 
-    // const [cityID, setCityID] = useState(null); 
-    const [restaurantID, setRestaurantID] = useState('18914709'); // can add ID as parameter
+    const [restaurantID, setRestaurantID] = useState(null); // can add ID as parameter
 
     /*--- Restaurant API ---*/
       useEffect(() => {
         axios.get(
-          `https://developers.zomato.com/api/v2.1/restaurant?res_id=${restaurantID}`, {
+            `https://developers.zomato.com/api/v2.1/search`, {
+          //`https://developers.zomato.com/api/v2.1/restaurant?res_id=${restaurantID}`, {
             headers: {
                 'user-key': '0bf18475f2628bd608f2add8be1bbe3d'
             }
@@ -69,9 +69,21 @@ function Home() {
     
 
     return(
-        <div>
-            <h1>Home: Midterm</h1>
+      <>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"></link>
+      <main>
+        <h1>Search for Restaurants</h1>
+        <div className="mainContainer">
+          <form class="searchBarContainer">
+            <label for="restaurantName">Search
+              <input name="restaurantName" type="text" id="restaurantName" placeholder="What restaurant are you looking for?" />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
         </div>
+      </main>
+    </>
+    
     );
 }
 
