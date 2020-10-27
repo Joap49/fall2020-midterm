@@ -14,6 +14,7 @@ function Home() {
     const history = useHistory();
 
     const [restaurantID, setRestaurantID] = useState(null); // can add ID as parameter
+    const [cocktail, setCocktail] = useState(null);
 
     /*--- Restaurant API ---*/
       useEffect(() => {
@@ -36,21 +37,25 @@ function Home() {
       }, [restaurantID]); 
 
     /*--- Cocktail API ---*/
-    const options = {
-        method: 'GET',
-        url: 'https://rapidapi.p.rapidapi.com/list.php',
-        params: {a: 'list'},
-        headers: {
-          'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
-          'x-rapidapi-key': '8477b258b4msh899dd24261167b1p1f92f6jsn6f7391baa85b'
-        }
-      };
-      
-      axios.request(options).then(function (response) {
+
+      useEffect(() => {
+        axios.get(
+          `https://rapidapi.p.rapidapi.com/list.php`, {
+            headers: {
+              'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
+              'x-rapidapi-key': '8477b258b4msh899dd24261167b1p1f92f6jsn6f7391baa85b'            }
+        }) 
+        .then(function (response) {
+          const cocktail = response.data;
+          setCocktail(cocktail);
           console.log(response.data); //TAKE OUT AT THE END
-      }).catch(function (error) {
-          console.error(error);
-      });
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
+      }, [cocktail]); 
+
 
 
 
@@ -58,7 +63,7 @@ function Home() {
       useEffect(() => {
         const searchParams = history.location.search;
         const urlParams = new URLSearchParams(searchParams);
-        const cityID = urlParams.get("cityID");
+        const restaurantID = urlParams.get("restaurantID");
       
         if(restaurantID){
             setRestaurantID(restaurantID)
