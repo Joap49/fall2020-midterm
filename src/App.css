@@ -1,4 +1,5 @@
 .body{
+  font-family: 'Nunito', sans-serif;
 
 }
 
@@ -9,114 +10,89 @@
 
 .Header{
   font-family: 'Nunito', sans-serif;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /*how many columns then how big*/
-  grid-template-rows: auto;
-  grid-column-gap: 2.5vmin;
-  grid-row-gap: 3vmin;
-  grid:
-   ". Title Title Title Title . "
-   ". . . . . ."
-   " . . dropdownCities . . ";
+  display: flex;
+  flex-direction: column;
+
+
 }
 
 .Title{
-  display: grid;
-  justify-content: center;
-  grid-area: Title;
-  grid-column-start: 3;
-  grid-column-end: 5;
-  grid-row-start: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-grow: 5;
+
 }
 
 .Title h1{
-  display: grid;
+  margin-bottom: 0px;
+  /* display: flex;
   justify-content: center;
+  align-content: center; */
 }
-
-.Header nav a{
-
-}
-
-.Header nav a:hover {
-  color: red;
-}
-
-.Header nav{
-
-}
-
-.dropdownCities{
-  grid-area: dropdownCities;
-  display: grid;
-  justify-content: center;
-  grid-column-start: 3;
-  grid-column-end: 5;
-  grid-row-end: 3
-}
-
-.dropdownButton{
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-.dropdownNav{
+.navBar{
   display: flex;
   justify-content: center;
-  overflow: scroll;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  align-items: center;
+
 }
 
-.dropdownNav a{
+.nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.a{
   color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdownCities:hover .dropdownNav{
-  display: block;
 }
 
+. a:hover{
+  color: #f86832;
+}
+
+.Home{
+  display: flex;
+  justify-content: space-between;
+}
 
 .mainContainer{
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /*how many columns then how big*/
-    grid-template-rows: auto;
-    grid-column-gap: 2.5vmin;
-    grid-row-gap: 3vmin;
-    grid-template-areas:
-     ". dinnerContainer . . drinkContainer drinkContainer . "
-     ". dinnerContainer . . drinkContainer drinkContainer ."
-     ". dinnerContainer . . . . .  ";
+  display: flex;
+  padding: 100px;
+
 }
 
 .dinnerContainer{
-  grid-area: dinnerContainer;
-  display: grid;
-  justify-content: center;
-  /* grid-column-start: 2;
-  grid-column-end: 4; */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  padding-left: 50px;
+  padding-right: 25px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  min-width: 50vw;
+
 }
 
 .drinkContainer{
-  grid-area: drinkContainer;
-  display: grid;
-  justify-content: center;
-  grid-column-start: 4;
-  grid-column-end: 6;
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px;
+  padding-right: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
 }
 
 .dinnerHeaders{
 
+
 }
 
 .Tagline{
+  padding-bottom: 10px;
 
 }
 
@@ -129,4 +105,38 @@
 }
 
 @media screen and (max-width: 640px) {
+  .Header {
+    flex-direction: column;
+  }
+
+  .Header nav a {
+    font-size: 14px;
+  }
+
+  .Home{
+    flex-direction: column;
+  }
+
+  .mainContainer{
+    flex-direction: column;
+  }
+
+  .dinnerContainer{
+    padding-right: 50px;
+    flex-wrap: wrap;
+  }
+
+  .drinkContainer{
+    padding-left: 50px;
+  }
+
+  .cuisine{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .cuisine p{
+    padding-right: 10px;
+  }
+
 }

@@ -13,7 +13,7 @@ function Home() {
 
     const history = useHistory();
 
-    const [cuisineNames, setCuisineNames] = useState(); // can add ID as parameter
+    const [cuisineNames, setCuisineNames] = useState([]); // can add ID as parameter
     const [cocktail, setCocktail] = useState();
     const [cityID, setCityID] = useState();
     const [cityName, setCity] = useState();
@@ -64,8 +64,8 @@ function Home() {
         .then(function (response) {
 
           const cuisines = response.data.cuisines;
-          const names = cuisines.map(c => c.cuisine.cuisine_name) + " " // maps through array to retrieve cuisine_name value
-          setCuisineNames(names);
+          // const names = cuisines.map(c => c.cuisine.cuisine_name) + " " // maps through array to retrieve cuisine_name value
+          setCuisineNames(cuisines);
         })
         .catch(function (error) {
           // handle error
@@ -108,8 +108,10 @@ function Home() {
           <h2></h2>
           <div className="mainContainer">
             <div className="dinnerContainer">
-              <h3 className="dinnerHeaders">Types of Cuisine:</h3>
-              <p className="cuisine">{cuisineNames}</p>
+              <h3 className="dinnerHeaders">Types of Cuisine in {cityName}</h3>
+              <div className="cuisine">{cuisineNames.map((c, i) => (
+                <p>{c.cuisine.cuisine_name}</p>
+              ))}</div>
             </div>
             <div className="drinkContainer">
               <h3 className="dinnerHeaders">Random Drink:</h3>
