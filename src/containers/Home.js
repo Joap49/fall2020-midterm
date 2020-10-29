@@ -14,20 +14,19 @@ function Home() {
     const history = useHistory();
 
     const [cuisineNames, setCuisineNames] = useState(); // can add ID as parameter
-    const [cocktail, setCocktail] = useState(null);
+    const [cocktail, setCocktail] = useState();
     const [cityID, setCityID] = useState();
-    const [cityName, setCity] = useState("");
+    const [cityName, setCity] = useState();
 
-    /*--- City API ---*/
-
+    /*--- Find City ID API ---*/
     useEffect(() => {
       axios.get(
-          `https://developers.zomato.com/api/v2.1/cities?q=${cityName}' 
+          `https://developers.zomato.com/api/v2.1/cities?q=${cityName}'
           ` , {
           headers: {
               'user-key': foodKey
           }
-      }) 
+      })
       .then(function (response) {
         const cityID = response.data.location_suggestions[0].id
         setCityID(cityID);
@@ -35,28 +34,25 @@ function Home() {
       .catch(function (error) {
         // handle error
         console.log(error);
-  
+
       });
-    }, [cityName]); 
-    
+    }, [cityName]);
+
     useEffect(() => {
       const searchParams = history.location.search;
       const urlParams = new URLSearchParams(searchParams);
       const cityName = urlParams.get("cityName");
-  
-    
+
+
       if(cityName){
           setCity(cityName)
       }
-      console.log("urlParams", urlParams)
     }, [history]);
 
-/*--- cuisines ---*/
+/*--- List of Cuisines API ---*/
       useEffect(() => {
         if(cityID){
-          console.log('cityID')
         }else{
-          console.log('no')
         }
         axios.get(
             `https://developers.zomato.com/api/v2.1/cuisines?city_id=${cityID}`
@@ -64,11 +60,11 @@ function Home() {
             headers: {
                 'user-key': foodKey
             }
-        }) 
+        })
         .then(function (response) {
-        
+
           const cuisines = response.data.cuisines;
-          const names = cuisines.map(c => c.cuisine.cuisine_name) + ' ' // maps through array to retrieve cuisine_name value
+          const names = cuisines.map(c => c.cuisine.cuisine_name) + " " // maps through array to retrieve cuisine_name value
           setCuisineNames(names);
         })
         .catch(function (error) {
@@ -77,45 +73,52 @@ function Home() {
         });
       }, [cityID]); // everytime this value updates, runs callback function
 
-    /*--- Cocktail API ---*/
-
-    const options = { //rapidAPI code
-      method: 'GET',
-      url: 'https://rapidapi.p.rapidapi.com/random.php',
-      headers: {
-        'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
-        'x-rapidapi-key': drinkKey
+/*--- Random Cocktail Generator API ---*/
+    useEffect(() => {
+      if(history){
+      }else{
       }
-    };
-    
-    axios.request(options)
-    .then(function (response) {
-      console.log(response.data);
-      const drinks = response.data.drinks;
-      const randomCocktail = drinks.map(r => r.strDrink)
-      setCocktail(randomCocktail);
-    })
-    .catch(function (error) {
-      console.error(error);
-    },[]);
-  
+      axios.get(
+        'https://rapidapi.p.rapidapi.com/random.php'
+          , {
+          headers: {
+            'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
+            'x-rapidapi-key': drinkKey
+          }
+      })
+      .then(function (response) {
+        console.log(response.data);
+        const drinks = response.data.drinks;
+        const randomCocktail = drinks.map(r => r.strDrink);
+        setCocktail(randomCocktail);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+    }, [history]); // everytime this value updates, runs callback function
+
+
 
     return(
       <>
-      <Header />
-      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
-      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"></link>
-      <main>
-        <h1>What type of food do you want to eat?</h1>
-        <div className="mainContainer">
-          <h3>Types of Cuisine:</h3>
-          <p>{cuisineNames}</p>
-          <h3> Random Drink:</h3>
-          <p>{cocktail}</p>
-        </div>
-      </main>
-    </>
-    
+        <Header />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"/>
+        <main className="Home">
+          <h2></h2>
+          <div className="mainContainer">
+            <div className="dinnerContainer">
+              <h3 className="dinnerHeaders">Types of Cuisine:</h3>
+              <p className="cuisine">{cuisineNames}</p>
+            </div>
+            <div className="drinkContainer">
+              <h3 className="dinnerHeaders">Random Drink:</h3>
+              <p className="drinks">{cocktail}</p>
+            </div>
+          </div>
+        </main>
+      </>
+
     );
 }
 

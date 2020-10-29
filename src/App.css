@@ -1,0 +1,132 @@
+.body{
+
+}
+
+.main{
+  font-family: 'Nunito', sans-serif;
+
+}
+
+.Header{
+  font-family: 'Nunito', sans-serif;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /*how many columns then how big*/
+  grid-template-rows: auto;
+  grid-column-gap: 2.5vmin;
+  grid-row-gap: 3vmin;
+  grid:
+   ". Title Title Title Title . "
+   ". . . . . ."
+   " . . dropdownCities . . ";
+}
+
+.Title{
+  display: grid;
+  justify-content: center;
+  grid-area: Title;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 1;
+}
+
+.Title h1{
+  display: grid;
+  justify-content: center;
+}
+
+.Header nav a{
+
+}
+
+.Header nav a:hover {
+  color: red;
+}
+
+.Header nav{
+
+}
+
+.dropdownCities{
+  grid-area: dropdownCities;
+  display: grid;
+  justify-content: center;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-end: 3
+}
+
+.dropdownButton{
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdownNav{
+  display: flex;
+  justify-content: center;
+  overflow: scroll;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownNav a{
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdownCities:hover .dropdownNav{
+  display: block;
+}
+
+
+.mainContainer{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /*how many columns then how big*/
+    grid-template-rows: auto;
+    grid-column-gap: 2.5vmin;
+    grid-row-gap: 3vmin;
+    grid-template-areas:
+     ". dinnerContainer . . drinkContainer drinkContainer . "
+     ". dinnerContainer . . drinkContainer drinkContainer ."
+     ". dinnerContainer . . . . .  ";
+}
+
+.dinnerContainer{
+  grid-area: dinnerContainer;
+  display: grid;
+  justify-content: center;
+  /* grid-column-start: 2;
+  grid-column-end: 4; */
+}
+
+.drinkContainer{
+  grid-area: drinkContainer;
+  display: grid;
+  justify-content: center;
+  grid-column-start: 4;
+  grid-column-end: 6;
+}
+
+.dinnerHeaders{
+
+}
+
+.Tagline{
+
+}
+
+.cuisine{
+
+}
+
+.drinks{
+
+}
+
+@media screen and (max-width: 640px) {
+}
