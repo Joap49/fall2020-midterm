@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ const drinkKey = '8477b258b4msh899dd24261167b1p1f92f6jsn6f7391baa85b';
 const foodKey = '0bf18475f2628bd608f2add8be1bbe3d';
 
 
+
 function Home() {
 
     const history = useHistory();
@@ -17,6 +18,8 @@ function Home() {
     const [cocktail, setCocktail] = useState();
     const [cityID, setCityID] = useState();
     const [cityName, setCity] = useState();
+    const [cityIcon, setIcon] = useState({});
+
 
     /*--- Find City ID API ---*/
     useEffect(() => {
@@ -64,7 +67,6 @@ function Home() {
         .then(function (response) {
 
           const cuisines = response.data.cuisines;
-          // const names = cuisines.map(c => c.cuisine.cuisine_name) + " " // maps through array to retrieve cuisine_name value
           setCuisineNames(cuisines);
         })
         .catch(function (error) {
@@ -72,6 +74,7 @@ function Home() {
           console.log(error);
         });
       }, [cityID]); // everytime this value updates, runs callback function
+
 
 /*--- Random Cocktail Generator API ---*/
     useEffect(() => {
@@ -105,12 +108,11 @@ function Home() {
         <Header />
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"/>
         <main className="Home">
-          <h2></h2>
           <div className="mainContainer">
             <div className="dinnerContainer">
               <h3 className="dinnerHeaders">Types of Cuisine in {cityName}</h3>
               <div className="cuisine">{cuisineNames.map((c, i) => (
-                <p>{c.cuisine.cuisine_name}</p>
+                <p>• {c.cuisine.cuisine_name}</p>
               ))}</div>
             </div>
             <div className="drinkContainer">
